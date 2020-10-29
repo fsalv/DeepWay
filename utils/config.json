@@ -1,0 +1,13 @@
+{
+    "WAYP_VALUE": 1,
+    "MASK_DIM": 800,
+    "K": 8,
+    "DATA_N": 3000,
+    "DATA_N_VAL": 300,
+    "EPOCHS": 30,
+    "BATCH_SIZE": 16,
+    "FILTERS": 16,
+    "KERNEL_SIZE": 5,
+    "N": 2,
+    "lr": 3e-4
+}
