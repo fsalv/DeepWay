@@ -4,4 +4,4 @@ opencv-python
 scikit-learn
 matplotlib
 pandas
-tensorflow
+tensorflow-gpu==2.2
