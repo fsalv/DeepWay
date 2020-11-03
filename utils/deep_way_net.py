@@ -2,8 +2,6 @@ import tensorflow as tf
 import numpy as np
 
 
-
-
 class Mish(tf.keras.layers.Layer):
     '''
     Mish Activation Function.

@@ -9,7 +9,7 @@ from utils.geometry import compute_distance
 ######################## Astar planner ##########################  
 #
 # The implementation of the AstarPlanner class is based on
-# https://github.com/AtsushiSakai/PythonRobotics
+#      https://github.com/AtsushiSakai/PythonRobotics
 #
 #################################################################
 class AStarPlanner:
