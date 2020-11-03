@@ -36,7 +36,7 @@ To generate the paths with the A* algorithm and compute the coverage metric, you
 
 **Warning** If you don't have gpu support, comment the third cell (*"select a GPU and set memory growth"*).
 
-### _Note on the satellite dataset_
+####  _Note on the satellite dataset_
 The 35 masks of the real-world remote-sensed dataset have been derived by manual labeling of images taken from Google Maps. Google policy for the products of its satellite service can be found [here](https://www.google.com/permissions/geoguidelines/). Images can be used for reasearch purposes by giving the proper attribution to the owner. However, for this repository we chose to only provided the masks and not the original images.
 
 ## Citation
