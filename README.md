@@ -14,7 +14,7 @@ Then install the required python packages:
 cd DeepWay
 pip install -r requirements.txt
 ```
-We recommend to do it in a separate virtual environment with respect to your main one to avoid compatibility issues for packages versions.
+We recommend to do it in a separate virtual environment with respect to your main one to avoid compatibility issues for packages versions. In this case, remember to create a jupyter linked to the new environment.
 
 **Warning** If you don't have gpu available or if yuo have CUDA issues, please install the ```tensorflow-cpu``` package.
 
