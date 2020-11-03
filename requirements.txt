@@ -1,7 +1,7 @@
-numpy==1.19
+tensorflow-gpu==2.2
 scipy
 opencv-python
 scikit-learn
 matplotlib
 pandas
-tensorflow-gpu==2.2
+numpy==1.19
