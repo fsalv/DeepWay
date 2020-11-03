@@ -2,7 +2,9 @@
 
 ![Deepway](media/deepway.png)
 
-## Clone the repository and prepare the python environment
+This repository contains all the code related to [DeepWay](https://arxiv.org/abs/2010.16322), a deep learning model able to predict the position of waypoints useful for global path planning of autonomous unmanned robots in row-crop fields.
+
+## 1 Clone the repository and prepare the python environment
 
 First, clone the repository:
 
@@ -18,7 +20,7 @@ We recommend to do it in a separate virtual environment with respect to your mai
 
 **Warning** If you don't have gpu available or if yuo have CUDA issues, please install the ```tensorflow-cpu``` package.
 
-## Network training
+## 2 Network training
 
 Run the jupyter notebook ```Artificial Dataset Generator.ipynb``` to generate the random synthethic dataset. You can modify useful parameters in the first cells of the notebook.
 
@@ -28,11 +30,14 @@ You can test DeepWay on both the satellite and synthethic test datasets with the
 
 **Warning** If you don't have gpu support, comment the third cell (*"select a GPU and set memory growth"*) on both the training and testing notebooks.
 
-## Path planning
+## 3 Path planning
 
 To generate the paths with the A* algorithm and compute the coverage metric, you can use the ``` Prediction and Path Planning.ipynb``` notebook. Again, you can change the test set inside the notebook to select satellite or synthethic datasets. Note that the A* execution will require a lot of time, exspecially if it finds some trouble in generating the path for too narrow masks.
 
 **Warning** If you don't have gpu support, comment the third cell (*"select a GPU and set memory growth"*).
+
+### _Note on the satellite dataset_
+The 35 masks of the real-world remote-sensed dataset have been derived by manual labeling of images taken from Google Maps. Google policy for the products of its satellite service can be found [here](https://www.google.com/permissions/geoguidelines/). Images can be used for reasearch purposes by giving the proper attribution to the owner. However, for this repository we chose to only provided the masks and not the original images.
 
 ## Citation
 If you enjoyed this repository and you want to cite our work, for now you can refer to the [pre-print of our article on ArXiv](https://arxiv.org/abs/2010.16322).
