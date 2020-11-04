@@ -1,6 +1,8 @@
 <h1 align="center">  DeepWay </h1>
 
-![Deepway](media/deepway.png)
+<p align="center">
+  <img src=media/deepway.png>
+</p>
 
 This repository contains all the code related to [DeepWay](https://arxiv.org/abs/2010.16322), a deep learning model able to predict the position of waypoints useful for global path planning of autonomous unmanned robots in row-crop fields.
 
