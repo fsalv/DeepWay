@@ -34,7 +34,7 @@ You can test DeepWay on both the satellite and synthethic test datasets with the
 
 To generate the paths with the A* algorithm and compute the coverage metric, you can use the ``` Prediction and Path Planning.ipynb``` notebook. Again, you can change the test set inside the notebook to select satellite or synthethic datasets. Note that the A* execution will require a lot of time, exspecially if it finds some trouble in generating the path for too narrow masks.
 
-**Warning** If you don't have gpu support, comment the third cell (*"select a GPU and set memory growth"*).
+**Warning** If you don't have gpu support, comment the fourth cell (*"select a GPU and set memory growth"*).
 
 <br/><br/><br/><br/>
 
