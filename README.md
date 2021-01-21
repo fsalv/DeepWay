@@ -41,7 +41,7 @@ To generate the paths with the A* algorithm and compute the coverage metric, you
 <br/><br/><br/><br/>
 
 ####  _Note on the satellite dataset_
-The 35 masks of the real-world remote-sensed dataset have been derived by manual labeling of images taken from Google Maps. Google policy for the products of its satellite service can be found [here](https://www.google.com/permissions/geoguidelines/). Images can be used for reasearch purposes by giving the proper attribution to the owner. However, for this repository we chose to release the masks only and not the original satellite images.
+The 100 masks of the real-world remote-sensed dataset have been derived by manual labeling of images taken from Google Maps. Google policy for the products of its satellite service can be found [here](https://www.google.com/permissions/geoguidelines/). Images can be used for reasearch purposes by giving the proper attribution to the owner. However, for this repository we chose to release the masks only and not the original satellite images.
 
 ## Citation
 If you enjoyed this repository and you want to cite our work, for now you can refer to the [pre-print of our article on ArXiv](https://arxiv.org/abs/2010.16322).
