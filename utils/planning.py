@@ -271,8 +271,9 @@ def field_coverage(mask,path,wp,clusters,target_wp,return_tp=False):
         points_old = points_new[::-1]
 
     n_rows = len(target_wp)//2
+    cov = np.clip(0,total_true_positive/(n_rows-1),1)
     if return_tp:
-        return total_true_positive/(n_rows-1),total_true_positive
+        return cov,total_true_positive
     else:
-        return total_true_positive/(n_rows-1)
+        return cov
 
