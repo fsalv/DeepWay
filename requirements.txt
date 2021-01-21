@@ -1,7 +1,8 @@
-tensorflow-gpu==2.2
+tensorflow
 scipy
 opencv-python
 scikit-learn
 matplotlib
 pandas
 numpy==1.19
+tqdm
