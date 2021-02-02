@@ -51,3 +51,12 @@ The 100 masks of the real-world remote-sensed dataset have been derived by manua
 
 ## Citation
 If you enjoyed this repository and you want to cite our work, for now you can refer to the [pre-print of our article on ArXiv](https://arxiv.org/abs/2010.16322).
+
+```
+@article{mazzia2020deepway,
+  title={DeepWay: a Deep Learning Estimator for Unmanned Ground Vehicle Global Path Planning},
+  author={Mazzia, Vittorio and Salvetti, Francesco and Aghi, Diego and Chiaberge, Marcello},
+  journal={arXiv preprint arXiv:2010.16322},
+  year={2020}
+}
+```
