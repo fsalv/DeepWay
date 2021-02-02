@@ -1,10 +1,12 @@
-[![arXiv](http://img.shields.io/badge/arXiv-2001.09136-B31B1B.svg)](https://arxiv.org/abs/2010.16322)
+
 
 <h1 align="center">  DeepWay </h1>
 
 <p align="center">
   <img src=media/deepway.png>
 </p>
+
+[![arXiv](http://img.shields.io/badge/arXiv-2001.09136-B31B1B.svg)](https://arxiv.org/abs/2010.16322)
 
 This repository contains all the code related to [DeepWay](https://arxiv.org/abs/2010.16322), a deep learning model able to predict the position of waypoints useful for global path planning of autonomous unmanned robots in row-crop fields.
 
@@ -16,6 +18,8 @@ First, clone the repository:
 
 
 Then install the required python packages:
+
+
 ``` 
 cd DeepWay
 pip install -r requirements.txt
