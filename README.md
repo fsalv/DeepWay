@@ -1,3 +1,5 @@
+[![arXiv](http://img.shields.io/badge/arXiv-2001.09136-B31B1B.svg)](https://arxiv.org/abs/2010.16322)
+
 <h1 align="center">  DeepWay </h1>
 
 <p align="center">
