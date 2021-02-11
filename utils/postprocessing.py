@@ -176,51 +176,6 @@ def move_wp(wp,alpha,mask,direction=1):
 
 
 
-def check_connection_OLD(mask,p1,p2,row_angle):
-    """
-        Compute the number of crossed rows between p1 and p2
-    """
-    alpha = line_polar(p1,p2)[1]
-    if not mask[p1[1],p1[0]]:   # check if p1 is on row
-        p1 = move_wp(p1,alpha,mask,direction=-1)
-    if not mask[p2[1],p2[0]]:   # check if p2 is on row
-        p2 = move_wp(p2,alpha,mask)
-
-    l = (compute_distance(p1,p2)+1).astype("int")
-    xy = np.linspace(p1,p2,l)
-    x_line = np.round(xy[...,0]).astype(int)
-    y_line = np.round(xy[...,1]).astype(int)
-
-    angle_diff = alpha-row_angle
-    cooldown = abs(find_intersect(angle_diff,(0,0),0,(0,1),ret_xy=False))
-    cooldown = int(np.round(np.clip(cooldown,1,min(l/10,100))))
-
-    a = mask[y_line,x_line]
-    a = np.insert(a,len(a),0)
-    
-    mask_falling = (a[:-1] > 0.5) & (a[1:] < 0.5)
-    falling_edges = np.flatnonzero(mask_falling)
-    mask_rising = (a[:-1] < 0.5) & (a[1:] > 0.5)
-    rising_edges = np.flatnonzero(mask_rising)
-    
-    cross = 0
-    inverted = False
-    row_centers = []
-    for i in range(len(rising_edges)):
-        if not inverted:
-            if falling_edges[i]+cooldown<=rising_edges[i]:
-                center = np.mean([falling_edges[i],rising_edges[i]])+1
-                row_centers.append(center.astype(int))
-                cross +=1
-                inverted = True
-        if inverted:
-            if rising_edges[i]+cooldown*3<=falling_edges[i+1]: # minum of 3 pixels for intrarow
-                inverted = False
-    
-    return cross,p1,p2,xy[row_centers].astype(int)
-
-
-
 def check_connection(mask,p1,p2,row_angle):
     """
         Compute the number of crossed rows between p1 and p2
@@ -259,17 +214,17 @@ def check_connection(mask,p1,p2,row_angle):
         i_old = 0
         for i in d:
             row_cross_sum.append(np.sum(b[i_old:i]))
-            row_centers.append(np.mean((falling_edges[i_old],rising_edges[i-1]+1)).astype(int))
+            row_centers.append(np.mean((xy[falling_edges[i_old]],xy[rising_edges[i-1]+1]),axis=0))
             i_old = i
         row_cross_sum.append(np.sum(b[i_old:]))
-        row_centers.append(np.mean((falling_edges[i_old],rising_edges[-1]+1)).astype(int))
+        row_centers.append(np.mean((xy[falling_edges[i_old]],xy[rising_edges[-1]+1]),axis=0))
     
     row_cross_sum = np.array(row_cross_sum,"int")
-    row_centers = np.array(row_centers,"int")
+    row_centers = np.array(row_centers)
     
     cross = np.sum(row_cross_sum>cooldown)
     row_centers = row_centers[row_cross_sum>cooldown]
-    return cross,p1,p2,xy[row_centers].astype(int)
+    return cross,p1,p2,row_centers
 
 
 
@@ -365,7 +320,7 @@ def merge_clusters(mask,CL,row_angle,row_normal,verbose=False):
         cl_proj = []
         for c in CL:
             cl_proj.append(np.dot(c,row_normal))
-        order = np.argsort([c[0] for c in cl_proj])
+        order = np.argsort([np.mean(c) for c in cl_proj])
         merged_cl = np.empty((0,2))
         for i in range(len(order[:-1])):
             wp_border = correct_wp(mask,[CL[order[i]][-1],CL[order[i+1]][0]],row_angle,verbose)
@@ -468,9 +423,16 @@ def get_principal_clusters(mask,wp_cl,row_angle,row_normal,verbose=False):
             
     cluster_a = merge_clusters(mask,wp_cl[CLA],row_angle,row_normal,verbose)
     cluster_b = merge_clusters(mask,wp_cl[CLB],row_angle,row_normal,verbose)
+    cluster_a = delete_wrong(mask,cluster_a) #filter eventually wrong waypoints
+    cluster_b = delete_wrong(mask,cluster_b) #filter eventually wrong waypoints
     return cluster_a,cluster_b
 
 
+def delete_wrong(mask,waypoints):
+    """
+       Delete all waypoints on obstacles
+    """
+    return waypoints[mask[waypoints[:,1],waypoints[:,0]]==1]
 
 ##################### Wp ordering #####################
 
@@ -562,73 +524,3 @@ def order_wp(cluster_a,cluster_b,mask,row_angle,verbose=False):
             print(counter,np.array(names)[np.array(cluster_order).astype("int")])
     
     return np.array(wp_ordered),np.array(cluster_order,"int")
-
-
-
-
-def order_wp_OLD(cluster_a,cluster_b,mask,row_angle,verbose=False):
-    """
-        Computes the final order of the wp for path planning.
-    """
-    clusters = [cluster_a,cluster_b]
-    names = ["A","B"]
-
-    if len(cluster_a)>=len(cluster_b):
-        wp_ordered = [cluster_a[0]]
-        indexes = [1,0]
-        next_clus = 1
-        actual_clus = 0
-    else:
-        wp_ordered = [cluster_b[0]]
-        cluster_order = [1]
-        indexes = [0,1]
-        next_clus = 0
-        actual_clus = 1
-        
-    cluster_order = [actual_clus]
-    while indexes[0]<len(cluster_a) or indexes[1]<len(cluster_b):
-        if indexes[next_clus]<len(clusters[next_clus]):
-            if actual_clus == next_clus:
-                wp_ordered.append(clusters[next_clus][indexes[next_clus]])
-                indexes[next_clus] += 1
-                next_clus = not(next_clus)
-                cluster_order.append(actual_clus)
-                if verbose:
-                    print(f"Adding point {indexes[actual_clus]-1} from cluster {names[actual_clus]}. Targets: {indexes}")
-                continue
-
-            else:
-                if not check_connection(mask,wp_ordered[-1],clusters[next_clus][indexes[next_clus]],row_angle)[0]:
-                    wp_ordered.append(clusters[next_clus][indexes[next_clus]])
-                    indexes[next_clus] += 1
-                    actual_clus = not(actual_clus)
-                    cluster_order.append(actual_clus)
-                    if verbose:
-                        print(f"Adding point {indexes[next_clus]-1} from cluster {names[actual_clus]}. Targets: {indexes}")
-                    continue
-
-                if indexes[next_clus]+1<len(clusters[next_clus]):
-                    if not check_connection(mask,wp_ordered[-1],clusters[next_clus][indexes[next_clus]+1],row_angle)[0]:
-                        wp_ordered.append(clusters[next_clus][indexes[next_clus]+1])
-                        indexes[next_clus] += 2
-                        actual_clus = not(actual_clus)
-                        cluster_order.append(actual_clus)
-                        if verbose:
-                            print(f"Skipping, adding point {indexes[next_clus]-2} from cluster {names[actual_clus]}. Targets: {indexes}")
-                        continue
-
-                if indexes[actual_clus]+1<len(clusters[actual_clus]):
-                    wp_ordered.append(clusters[actual_clus][indexes[actual_clus]])
-                    indexes[actual_clus] += 1
-                    cluster_order.append(actual_clus)
-                    if verbose:
-                        print(f"Remaining, adding point {indexes[actual_clus]-1} from cluster {names[actual_clus]}. Targets: {indexes}")
-                else:
-                    if verbose:
-                        print("I can't connect to the next point. Finishing.")
-                    return np.array(wp_ordered),np.array(cluster_order)
-        else:
-            next_clus = not(next_clus)
-    
-    return np.array(wp_ordered),np.array(cluster_order)
-

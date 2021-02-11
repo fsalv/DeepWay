@@ -189,7 +189,7 @@ class AStarPlanner:
 
         return motion
 
-
+    
 ######################## Plan the path, given the ordered wp ########################    
     
 def plan_path(wp,a_star,smooth=False,img_index=0):
@@ -203,8 +203,6 @@ def plan_path(wp,a_star,smooth=False,img_index=0):
     if smooth:
         path=smooth_path(path)
     return path
-
-
 
 ######################## Path smoothing ########################    
 
