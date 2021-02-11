@@ -1,8 +1,12 @@
+
+
 <h1 align="center">  DeepWay </h1>
 
 <p align="center">
   <img src=media/deepway.png>
 </p>
+
+[![arXiv](http://img.shields.io/badge/arXiv-2001.09136-B31B1B.svg)](https://arxiv.org/abs/2010.16322)
 
 This repository contains all the code related to [DeepWay](https://arxiv.org/abs/2010.16322), a deep learning model able to predict the position of waypoints useful for global path planning of autonomous unmanned robots in row-crop fields.
 
@@ -14,6 +18,8 @@ First, clone the repository:
 
 
 Then install the required python packages:
+
+
 ``` 
 cd DeepWay
 pip install -r requirements.txt
@@ -45,3 +51,12 @@ The 100 masks of the real-world remote-sensed dataset have been derived by manua
 
 ## Citation
 If you enjoyed this repository and you want to cite our work, for now you can refer to the [pre-print of our article on ArXiv](https://arxiv.org/abs/2010.16322).
+
+```
+@article{mazzia2020deepway,
+  title={DeepWay: a Deep Learning Estimator for Unmanned Ground Vehicle Global Path Planning},
+  author={Mazzia, Vittorio and Salvetti, Francesco and Aghi, Diego and Chiaberge, Marcello},
+  journal={arXiv preprint arXiv:2010.16322},
+  year={2020}
+}
+```
