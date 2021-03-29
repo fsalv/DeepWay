@@ -63,6 +63,6 @@ year = {2021},
 issn = {0168-1699},
 doi = {https://doi.org/10.1016/j.compag.2021.106091},
 url = {https://www.sciencedirect.com/science/article/pii/S0168169921001095},
-author = {Vittorio Mazzia and Francesco Salvetti and Diego Aghi and Marcello Chiaberge},
+author = {Vittorio Mazzia and Francesco Salvetti and Diego Aghi and Marcello Chiaberge}
 }
 ```
