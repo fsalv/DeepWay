@@ -51,7 +51,7 @@ To generate the paths with the A* algorithm and compute the coverage metric, you
 The 100 masks of the real-world remote-sensed dataset have been derived by manual labeling of images taken from Google Maps. Google policy for the products of its satellite service can be found [here](https://www.google.com/permissions/geoguidelines/). Images can be used for reasearch purposes by giving the proper attribution to the owner. However, for this repository we chose to release the masks only and not the original satellite images.
 
 ## Citation
-If you enjoyed this repository and you want to cite our work, you can find the post-print editorial version of our paper [HERE](https://doi.org/10.1016/j.compag.2021.106091).
+If you enjoyed this repository and you want to cite our work, you can find the post-print editorial version of our paper [here](https://doi.org/10.1016/j.compag.2021.106091).
 
 ```
 @article{MAZZIA2021106091,
