@@ -10,7 +10,7 @@
 
 This repository contains all the code related to [DeepWay](https://arxiv.org/abs/2010.16322), a deep learning model able to predict the position of waypoints useful for global path planning of autonomous unmanned robots in row-crop fields.
 
-# 1.0 Getting Started
+# 1 Getting Started
 ## 1.1 Installation
 
 1. Clone this repository
@@ -27,7 +27,7 @@ We recommend to do it in a separate virtual environment with respect to your mai
 
 **Warning** If you don't have gpu available or if you have CUDA issues all calculations will be performed by your CPU.
 
-# 2.0 Network training
+# 2 Network training
 
 Run the jupyter notebook ```Artificial Dataset Generator.ipynb``` to generate the random synthethic dataset. You can modify useful parameters in the first cells of the notebook.
 
@@ -37,7 +37,7 @@ You can test DeepWay on both the satellite and synthethic test datasets with the
 
 **Warning** If you don't have gpu support, comment the third cell (*"select a GPU and set memory growth"*) on both the training and testing notebooks.
 
-# 3.0 Path planning
+# 3 Path planning
 <p align="center">
   <img src=media/deepway.png>
 </p>
