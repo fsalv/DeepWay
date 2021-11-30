@@ -105,13 +105,6 @@ def resa_module(x, filters,  kernel_size):
     x = x + x_res
     return x
 
-def normalize(x):
-    
-    x_0 = tf.keras.layers.Lambda(lambda x: x[...,0:1])(x)
-    x_0 = x_0 / 255.0
-    x_1 = tf.keras.layers.Lambda(lambda x: x[...,1:])(x)
-    return tf.keras.layers.Concatenate()([x_0, x_1])
-
 
 def pred_module(x):
     
@@ -130,7 +123,7 @@ def build_deepway(name_model, filters = 32, kernel_size = 3, N = 2, MASK_DIM = 8
     
     input_tensor = tf.keras.layers.Input(shape=(MASK_DIM,MASK_DIM))
     
-    x = tf.keras.layers.Lambda(normalize)(input_tensor)
+    x = tf.keras.layers.Lambda(lambda x: x/255.)(input_tensor)
     
     x = tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=(-1)))(input_tensor)
     
